@@ -1,23 +1,26 @@
 import uaslp.objects.list.linkedlist.LinkedList;
 import uaslp.objects.list.linkedlist.LinkedListIterator;
+import uaslp.objects.list.arraylist.ArrayList;
+import uaslp.objects.list.arraylist.ArrayListIterator;
 
 public class Main {
+
     public static void main(String[] args) {
-        LinkedList team1 = new LinkedList();
-        LinkedList team2 = new LinkedList();
-        LinkedList team3 = new LinkedList();
+        ArrayList team1 = new ArrayList();
+        ArrayList team2 = new ArrayList();
+        ArrayList team3 = new ArrayList();
 
         team1.addAtTail("Jesús");
         team1.addAtTail("Salomón");
         team1.addAtTail("Yael");
 
-        team2.addAtFront("Cristian");
+        team2.addAtFront("Christian");
         team2.addAtFront("Daniel");
         team2.addAtFront("Diego");
 
         team3.addAtFront("Imelda");
 
-        LinkedListIterator iterator;
+        ArrayListIterator iterator;
 
         iterator = team1.getIterator();
 
@@ -42,7 +45,6 @@ public class Main {
         // Diego
         // Daniel
         // Cristian
-
         team1.remove(0);
         team1.addAtFront("Rebeca");
         System.out.println("Team 1 tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
@@ -74,7 +76,6 @@ public class Main {
         // Diego
         // Daniel
         // Rita
-
         team3.remove(0);
         team3.remove(0); // El elemento no existe pero el programa no debe cerrarse por algún error
 
@@ -106,12 +107,9 @@ public class Main {
             String name = iterator.next();
             System.out.println(name);
         }
-
         // Debió haber impreso
         // Rebeca
         // Luis
         // Yael
-
-
     }
 }
