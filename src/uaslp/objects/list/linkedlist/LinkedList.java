@@ -1,103 +1,122 @@
 package uaslp.objects.list.linkedlist;
+import uaslp.objects.list.List;
 
-public class LinkedList {
-        private Node head;
-        private Node tail;
-        private int size;
+public class LinkedList<T> implements List<T> {
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
 
-        public void addAtTail(String data){
-                Node node = new Node(data);
-                if(size == 0) {
-                        head = node;
-                        tail = node;
-                }
-                else{
-                        tail.next = node;
-                        node.previous = tail;
-                }
-                tail = node;
-                size ++;
+    @Override
+    public void addAtTail(T data) {
+        Node<T> node = new Node<>(data);
+
+        //node.data=data;
+
+        if (size == 0) {
+            head = node;
+        } else {
+            tail.next = node;
+            node.previous = tail;
         }
-        public void addAtFront(String data){
-                Node node = new Node(data);
-                if(size == 0){
-                        tail = node;
-                }
-                else{
-                        head.previous = node;
-                }
-                node.next = head;
-                head = node;
-                size ++;
+
+        tail = node;
+        size++;
+    }
+
+    @Override
+    public void addAtFront(T data) {
+        Node<T> node = new Node<>(data);
+
+        if (size == 0) {
+            tail = node;
+        } else {
+            head.previous = node;
         }
-        public void remove(int index){
-                Node node = findNode(index);
-                if(node == null){
-                        return;
-                }
-                if (size == 1){
-                        head = null;
-                        tail = null;
-                }
-                else if (node == head){
-                        head = node.next;
-                        if(head != null){
-                                head.previous = null;
-                        }
-                }
-                else if (node == tail){
-                        tail = node.previous;
-                        if(tail != null){
-                                tail.next = null;
-                        }
-                }
-                else{
-                        node.previous.next = node.next;
-                        node.next.previous = node.previous;
-                }
-                size--;
+        node.next = head;
+        head = node;
+
+        size++;
+    }
+
+    @Override
+    public void remove(int index) {
+        Node<T> node = findNode(index);
+
+        if (node == null) {
+            return;
         }
-        public void removeAll(){
-                head = null;
-                tail = null;
-                size = 0;
+
+        if (size == 1) {
+            head = null;
+            tail = null;
+        } else if (node == head) {
+            head = node.next;
+            if (head != null) {
+                head.previous = null;
+            }
+        } else if (node == tail) {
+            tail = node.previous;
+            if (tail != null) {
+                tail.next = null;
+            }
+        } else {
+            node.previous.next = node.next;
+            node.next.previous = node.previous;
         }
-        public void setAt(int index, String data){
-                Node node = findNode(index);
-                if(node != null){
-                        node.data = data;
-                }
+        size--;
+    }
+
+    @Override
+    public void removeAll() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    @Override
+    public T getAt(int index) {
+        Node<T> node = findNode(index);
+
+        return node == null ? null : node.data;
+    }
+
+    @Override
+    public void setAt(int index, T data) {
+        Node<T> node = findNode(index);
+
+        if (node != null) {
+            node.data = data;
         }
-        public String getAt(int index){
-                Node node = findNode(index);
-                return node == null ? null : node.data;
+    }
+
+    private Node<T> findNode(int index) {
+        if (index < 0 || index >= size) {
+            return null;
         }
-        public void removeAllWithValue(String data){
-                int currentIndex = 0;
-                LinkedListIterator iterator = getIterator();
-                while(iterator.hasNext()) {
-                        if(data.equals(getAt(currentIndex))){
-                                remove(currentIndex);
-                                currentIndex++;
-                        }
-                }
+
+        Node<T> node = head;
+        int currentIndex = 0;
+
+        while (currentIndex != index) {
+            currentIndex++;
+            node = node.next;
         }
-        public int getSize(){
-                return size;
-        }
-        public LinkedListIterator getIterator(){
-                return new LinkedListIterator(head);
-        }
-        private Node findNode(int index){
-                if(index < 0 || index >= size){
-                        return null;
-                }
-                Node node = head;
-                int currentIndex = 0;
-                while (currentIndex != index){
-                        currentIndex++;
-                        node = node.next;
-                }
-                return node;
-        }
+
+        return node;
+    }
+
+    /*
+    public void removeAllWithValue(T data){
+    }*/
+
+    @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
+    public LinkedListIterator<T> getIterator() {
+        //return  null;
+        return new LinkedListIterator<>(head);
+    }
 }
