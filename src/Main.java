@@ -1,26 +1,14 @@
-package uaslp.objects.list;
 import uaslp.objects.list.linkedlist.LinkedList;
 import uaslp.objects.list.linkedlist.LinkedListIterator;
-import uaslp.objects.list.arraylist.ArrayList;
-import uaslp.objects.list.arraylist.ArrayListIterator;
 
 public class Main {
 
+
     public static void main(String[] args) {
-        List<String> team1 = new ArrayList<>();
-        List<String> team2 = new ArrayList<>();
-        List<String> team3 = new ArrayList<>();
+        LinkedList team1 = new LinkedList();
+        LinkedList team2 = new LinkedList();
+        LinkedList team3 = new LinkedList();
 
-        List<String> team4 = new LinkedList<>();
-        List<String> team5 = new LinkedList<>();
-        List<String> team6 = new LinkedList<>();
-
-        inter(team1,team2,team3, 0);
-        inter(team4,team5,team6, 1);
-    }
-
-    public static void inter(List<String> team1, List<String> team2, List<String> team3, int controller) {
-        controller*=3;
         team1.addAtTail("Jesús");
         team1.addAtTail("Salomón");
         team1.addAtTail("Yael");
@@ -31,7 +19,7 @@ public class Main {
 
         team3.addAtFront("Imelda");
 
-        Iterator<String> iterator;
+        LinkedListIterator iterator;
 
         iterator = team1.getIterator();
 
@@ -44,7 +32,7 @@ public class Main {
         // Jesús
         // Salomón
         // Yael
-        System.out.println();
+
         iterator = team2.getIterator();
 
         while (iterator.hasNext()) {
@@ -57,11 +45,9 @@ public class Main {
         // Daniel
         // Cristian
 
-        System.out.println();
         team1.remove(0);
         team1.addAtFront("Rebeca");
-        controller++;
-        System.out.println("Team "+ controller + " tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
+        System.out.println("Team 1 tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
 
         iterator = team1.getIterator();
 
@@ -74,11 +60,10 @@ public class Main {
         // Rebeca
         // Salomón
         // Yael
-        System.out.println();
+
         team2.remove(2);
         team2.addAtTail("Rita");
-        controller++;
-        System.out.println("Team " + controller + " tiene: " + team2.getSize() + " integrantes"); // debe imprimir "Team 2 tiene 3 integrantes"
+        System.out.println("Team 2 tiene: " + team2.getSize() + " integrantes"); // debe imprimir "Team 2 tiene 3 integrantes"
 
         iterator = team2.getIterator();
 
@@ -92,15 +77,13 @@ public class Main {
         // Daniel
         // Rita
 
-        System.out.println();
         team3.remove(0);
         team3.remove(0); // El elemento no existe pero el programa no debe cerrarse por algún error
 
         team3.addAtTail("Tadeo");
         team3.addAtFront("Isai");
 
-        controller++;
-        System.out.println("Team " + controller + " tiene: " + team3.getSize() + " integrantes"); // debe imprimir "Team 3 tiene 2 integrantes"
+        System.out.println("Team 3 tiene: " + team3.getSize() + " integrantes"); // debe imprimir "Team 3 tiene 2 integrantes"
 
         iterator = team3.getIterator();
 
@@ -117,9 +100,7 @@ public class Main {
             team1.setAt(1, "Luis");
         }
 
-        System.out.println();
-        controller-=2;
-        System.out.println("Team " + controller + " tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
+        System.out.println("Team 1 tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
 
         iterator = team1.getIterator();
 
@@ -127,5 +108,12 @@ public class Main {
             String name = iterator.next();
             System.out.println(name);
         }
+
+        // Debió haber impreso
+        // Rebeca
+        // Luis
+        // Yael
+
+
     }
 }

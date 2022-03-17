@@ -1,101 +1,92 @@
 package uaslp.objects.list.arraylist;
-import uaslp.objects.list.Iterator;
-import uaslp.objects.list.List;
 
-public class ArrayList<T> implements List<T> {
-    private  static final int DEFAULT_SIZE = 2;
-    private T[] array;
+public class ArrayList {
+
+    private static final int DEFAULT_SIZE = 2;
+    private String[] array;
     private int size;
 
-    public ArrayList(int size){
-        array= (T[]) new Object[size];
+    public static String getName(){
+        return "ArrayList";
     }
 
     public ArrayList(){
-        array= (T[]) new Object[DEFAULT_SIZE];
+        array = new String[DEFAULT_SIZE];
     }
 
-    @Override
-    public void addAtTail(T data){
+    public ArrayList(int size){
+        array = new String[size];
+    }
+
+    public void addAtTail(String data) {
+
         if(size == array.length){
-            increaseArrayList();
+            increaseArraySize();
         }
 
-        array[size]=data;
+        array[size] = data;
         size++;
     }
 
-    @Override
-    public void addAtFront(T data){
+    public void addAtFront(String data) {
+
         if(size == array.length){
-            increaseArrayList();
+            increaseArraySize();
         }
-        /*for(int i=0;i< array.length;i++){
-            array[i+1]=array[i];
-        }*/
-        if (size >= 0) System.arraycopy(array, 0, array, 1, size);
-        array[0]=data;
+
+        if (size >= 0) {
+            System.arraycopy(array, 0, array, 1, size);
+        }
+        array[0] = data;
         size++;
     }
 
-    @Override
-    public void remove(int index){
-        if (index < 0 || index >= size) {
+    public void remove(int index) {
+
+        if(index < 0 || index >= size){
             return;
         }
 
-        /*for(int i=index;i<size-1;i++)
-        {
-            array[i]=array[i+1];
-        }*/
-        if (size - 1 - index >= 0) System.arraycopy(array, index + 1, array, index, size - 1 - index);
-        array[size-1]=null;
+        if (size - 1 - index >= 0) {
+            System.arraycopy(array, index + 1, array, index, size - 1 - index);
+        }
+
+        array[size - 1] = null;
         size--;
     }
 
-    @Override
-    public void removeAll(){
-        for(int i=0;i<size;i++)
-        {
-            array[i]=null;
+    public void removeAll() {
+        for(int i = 0; i < size; i++){
+            array[i] = null;
         }
-        size=0;
+        size = 0;
     }
 
-    @Override
-    public T getAt(int index){
+    public void setAt(int index, String data) {
+        if(index >= 0 && index < size){
+            array[index] = data;
+        }
+    }
+    public String getAt(int index) {
         return index >= 0 && index < size ? array[index] : null;
     }
 
-    @Override
-    public void setAt(int index,T data){
-        if(index >= 0 && index < size)
-        {
-            array[index]=data;
-        }
+    public ArrayListIterator getIterator() {
+        return new ArrayListIterator(this);
     }
 
-    @Override
-    public Iterator<T> getIterator(){
-        return new ArrayListIterator<>(this);
-    }
-
-    /*
-    public void removeAllWithValue(T data){
-    }*/
-
-    @Override
-    public int getSize(){
+    public int getSize() {
         return size;
     }
 
-    private void increaseArrayList(){
-        T []newArray = (T[])new Object[array.length * 2];
+    private void increaseArraySize(){
+        String []newArray = new String[array.length * 2];
 
-        for(int i=0;i<size;i++){
-            newArray[i]=array[i];
+        for(int i = 0; i< size;i++){
+            newArray[i] = array[i];
         }
 
-        array=newArray;
+        array = newArray;
     }
+
 }
