@@ -1,3 +1,5 @@
+package uaslp.objects.list;
+
 import uaslp.objects.list.Iterator;
 import uaslp.objects.list.List;
 import uaslp.objects.list.linkedlist.LinkedList;
