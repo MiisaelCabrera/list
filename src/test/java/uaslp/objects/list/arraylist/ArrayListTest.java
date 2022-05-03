@@ -9,6 +9,73 @@ import uaslp.objects.list.exception.NotValidIndexException;
 public class ArrayListTest {
 
     @Test
+    public void givenASizeOfNewList_whenGetSize_thenResultIsThree() throws NotNullValuesAllowedException{
+        //Given:
+        ArrayList<String> array=new ArrayList<>(2);
+
+        array.addAtFront("Hola");
+        array.addAtFront("Adios");
+
+        //When:
+        array.addAtFront("Help");
+        int sizeOfList = array.getSize();
+
+        //Then:
+        Assertions.assertEquals(3, sizeOfList, "Expected size of 3."); //Valida que el tamaño sea 3
+        Assertions.assertEquals(array.getAt(0),"Help");
+        Assertions.assertEquals(array.getAt(1),"Adios");
+        Assertions.assertEquals(array.getAt(2),"Hola");
+    }
+
+    @Test
+    public void givenAListWithTwoElements_whenAddAtTailNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
+        //Given:
+        ArrayList<String> array=new ArrayList<>(); //Crea un objeto de la lista
+        array.addAtFront("Hola");
+        array.addAtTail("Mundo");
+
+        //When:
+        //Then:
+        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.addAtTail(null));
+    }
+
+    @Test
+    public void givenAListWithTwoElements_whenSetAtTailNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
+        //Given:
+        ArrayList<String> array=new ArrayList<>(); //Crea un objeto de la lista
+        array.addAtFront("Hola");
+        array.addAtTail("Mundo");
+
+        //When:
+        //Then:
+        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.setAt(0,null));
+    }
+
+    @Test //esto dice que es un test
+    public void givenAListWithTwoElements_whenSetAtNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
+        //Given
+        ArrayList<String> array = new ArrayList<>();
+        array.addAtFront("Hola");
+        array.addAtTail("Mundo");
+        //When:
+        //Then:  aqui el when y el then están mezclados
+        //"Metodo No Primitivo"
+        Assertions.assertThrows(NotNullValuesAllowedException.class, ()->array.setAt(0,null)); //valida que la excepcion NotValidIndexException es lanzada cuando llamo al setAt
+    }
+
+    @Test
+    public void givenAListWithTwoElements_whenAddAtFrontNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
+        //Given:
+        ArrayList<String> array=new ArrayList<>(); //Crea un objeto de la lista
+        array.addAtFront("Hola");
+        array.addAtTail("Mundo");
+
+        //When:
+        //Then:
+        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.addAtFront(null));
+    }
+
+    @Test
     public void givenANewList_whenGetSize_thenResultIsZero() {
         //Given:
         ArrayList<String> array = new ArrayList<>();
@@ -17,7 +84,7 @@ public class ArrayListTest {
         int sizeOfList = array.getSize();
 
         //Then:
-        Assertions.assertEquals(0, sizeOfList, "Size of list after creation must be zero.");
+        Assertions.assertEquals(0, sizeOfList, "Size of list after creation must be zero."); //Valida que el tamaño sea 1
     }
 
     @Test
@@ -122,7 +189,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithTwoElements_whenRemoveIndex1_thenSizeIsOne() throws NotNullValuesAllowedException{
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
         array.addAtFront("Hola");
         array.addAtTail("Mundo");
 
@@ -139,7 +206,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithThreeElements_whenRemoveIndex1_thenSizeIsTwo() throws NotNullValuesAllowedException{
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
 
         array.addAtTail("Mundo");
         array.addAtTail("Cruel");
@@ -159,7 +226,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithThreeElements_whenRemoveElementAtTail_thenSizeIsTwo() throws NotNullValuesAllowedException{
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
 
         array.addAtFront("Adiós");
         array.addAtTail("Mundo");
@@ -179,7 +246,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithThreeElements_whenRemoveAll_thenSizeIsZero() throws NotNullValuesAllowedException{
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
 
         array.addAtFront("Adiós");
         array.addAtTail("Mundo");
@@ -197,7 +264,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithTwoElements_whenSetAt_thenElementIsModified() throws NotNullValuesAllowedException{
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
 
         array.addAtTail("Mundo");
         array.addAtFront("Adiós");
@@ -216,7 +283,7 @@ public class ArrayListTest {
     @Test
     public void givenAListWithThreeElements_whenGetIterator_thenIteratorWorksOverThreeElements() throws NotNullValuesAllowedException, NotValidIndexException {
         //Given:
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> array = new ArrayList<>(); //Crea un objeto de la lista
 
         array.addAtFront("Adiós");
         array.addAtTail("Mundo");
@@ -237,70 +304,5 @@ public class ArrayListTest {
         Assertions.assertTrue(iterator.hasNext());
         Assertions.assertEquals("Cruel",iterator.next());
         Assertions.assertFalse(iterator.hasNext());
-    }
-
-    @Test
-    public void givenASizeOfNewList_whenGetSize_thenResultIsThree() throws NotNullValuesAllowedException{
-        //Given:
-        ArrayList<String> array=new ArrayList<>(2);
-
-        array.addAtFront("Hola");
-        array.addAtFront("Adios");
-
-        //When:
-        array.addAtFront("Help");
-        int sizeOfList = array.getSize();
-
-        //Then:
-        Assertions.assertEquals(3, sizeOfList, "Expected size of 3.");
-        Assertions.assertEquals(array.getAt(0),"Help");
-        Assertions.assertEquals(array.getAt(1),"Adios");
-        Assertions.assertEquals(array.getAt(2),"Hola");
-    }
-
-    @Test
-    public void givenAListWithTwoElements_whenAddAtTailNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
-
-        //Given:
-        ArrayList<String> array=new ArrayList<>(); //Crea un objeto de la lista
-        array.addAtFront("Hola");
-        array.addAtTail("Mundo");
-
-        //When Then:
-        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.addAtTail(null));
-    }
-
-    @Test
-    public void givenAListWithTwoElements_whenSetAtTailNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
-        //Given:
-        ArrayList<String> array=new ArrayList<>();
-        array.addAtFront("Hola");
-        array.addAtTail("Mundo");
-
-        //When Then:
-        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.setAt(0,null));
-    }
-
-    @Test
-    public void givenAListWithTwoElements_whenSetAtNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
-        //Given
-
-        ArrayList<String> array = new ArrayList<>();
-        array.addAtFront("Hola");
-        array.addAtTail("Mundo");
-
-        //When Then:
-        Assertions.assertThrows(NotNullValuesAllowedException.class, ()->array.setAt(0,null));
-    }
-
-    @Test
-    public void givenAListWithTwoElements_whenAddAtFrontNullValue_thenNotNullValuesAllowedExceptionIsThrown() throws NotNullValuesAllowedException {
-        //Given:
-        ArrayList<String> array=new ArrayList<>();
-        array.addAtFront("Hola");
-        array.addAtTail("Mundo");
-
-        //When Then:
-        Assertions.assertThrows(NotNullValuesAllowedException.class,()->array.addAtFront(null));
     }
 }

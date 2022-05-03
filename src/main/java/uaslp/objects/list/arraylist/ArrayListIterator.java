@@ -1,12 +1,13 @@
 package uaslp.objects.list.arraylist;
+
 import uaslp.objects.list.Iterator;
 
-public class ArrayListIterator <T> implements Iterator <T>{
+public class ArrayListIterator<T> implements Iterator<T> {
 
-    private final ArrayList<T> arrayList;
+    private ArrayList<T> arrayList;
     private int currentItem;
 
-    public ArrayListIterator(ArrayList <T> arrayList){
+    public ArrayListIterator(ArrayList<T> arrayList){
         this.arrayList=arrayList;
     }
 
